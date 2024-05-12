@@ -12,7 +12,7 @@ const client = new ApolloClient({
 const GetCategory = async () => {
   const query = gql`
     query Categories {
-      categories(first: 10) {
+      categories(first: 20) {
         id
         name
         slug

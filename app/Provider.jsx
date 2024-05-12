@@ -3,7 +3,7 @@ import Header from "./_components/Header";
 
 function Provider({ children }) {
   return (
-    <div>
+    <div className="px-10 ">
       <Header />
       {children}
     </div>
