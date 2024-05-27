@@ -20,8 +20,7 @@ const CategoryList = () => {
    * useEffect to get category lis
    */
 
-  useEffect(() => {}, [params]);
-
+// use UseEffect hook to call the getCategoryList function everytime the page loads to display the list of categories
   useEffect(() => {
     getCategoryList();
   }, []);
