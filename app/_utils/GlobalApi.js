@@ -39,20 +39,18 @@ const GetBusiness = async (category) => {
       restaurants(where: { categories_some: { slug: $slug } }) {
         about
         address {
-          distance(from: { latitude: 1.5, longitude: 1.5 })
-          latitude
           longitude
         }
         banner {
           url
         }
         categories {
+          id
           name
         }
-        workingHours
-        id
         name
         slug
+        workingHours
         restroType
       }
     }

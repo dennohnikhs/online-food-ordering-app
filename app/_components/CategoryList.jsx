@@ -3,21 +3,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import GlobalApi from "../_utils/GlobalApi";
 import Image from "next/image";
-import { ArrowLeftCircle, ArrowRightCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Skeleton } from "@/components/ui/skeleton";
 import { SkeletonCard } from "./CategoryListSkeleton";
 
 const CategoryList = () => {
   const listRef = useRef(null);
-  const params = useSearchParams();
   const [categoryList, setCategoryList] = useState();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   /**
-   * useEffect to get category lis
+   * useEffect to get category list
    */
 
 // use UseEffect hook to call the getCategoryList function everytime the page loads to display the list of categories
