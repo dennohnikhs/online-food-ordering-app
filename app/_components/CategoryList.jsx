@@ -6,21 +6,32 @@ import Image from "next/image";
 import { ArrowRightCircle } from "lucide-react";
 import Link from "next/link";
 import { SkeletonCard } from "./CategoryListSkeleton";
+import { useSearchParams } from "next/navigation";
 
 const CategoryList = () => {
+  const params = useSearchParams();
   const listRef = useRef(null);
-  const [categoryList, setCategoryList] = useState();
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  /**
-   * useEffect to get category list
-   */
-
-// use UseEffect hook to call the getCategoryList function everytime the page loads to display the list of categories
+  
+  // use useEffect hook to update selectedCategory based on URL parameters
+  useEffect(() => {
+    const categoryParam = params.get("category");
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [params]);
+    
+    
+  // use UseEffect hook to call the getCategoryList function everytime the page loads to display the list of categories
   useEffect(() => {
     getCategoryList();
   }, []);
+
+
+
   const getCategoryList = async () => {
     setIsLoading(true);
     await GlobalApi.GetCategory().then((res) => {
@@ -28,6 +39,8 @@ const CategoryList = () => {
       setIsLoading(false);
     });
   };
+
+
   const ScrollRightHandler = () => {
     if (listRef.current) {
       listRef.current.scrollBy({
@@ -37,36 +50,48 @@ const CategoryList = () => {
     }
   };
 
+
+
   return (
-    <div className=" relative mt-10">
+    <div className=" relative lg:mt-10 mt-6">
       <div
         className=" flex  gap-4 overflow-auto scrollbar-hide  "
         ref={listRef}
       >
         {!isLoading ? (
+
+
+          // if category list is present
+
+
           categoryList &&
           categoryList.map((category, index) => (
             <Link
-              href={"?category=" + category.slug}
+              href={"?category=" + category?.slug}
               key={index}
-              className={`flex flex-col items-center gap-2 border p-3 rounded-xl min-w-28 hover:border-primary hover:bg-orange-50 cursor-pointer group ${
+              className={`flex flex-col justify-center items-center gap-2 border p-3 rounded-xl min-w-32 min-h-28   hover:border-primary hover:bg-orange-50 cursor-pointer group ${
                 selectedCategory === category.slug &&
                 "text-primary border-primary bg-orange-50"
               }`}
             >
               <Image
                 src={category.icon?.url}
-                alt={category.name}
+                alt={category?.name}
                 width={40}
                 height={40}
                 className="group-hover:scale-125 transition-all duration-200"
               />
               <div className="text-sm font-medium group-hover:text-primary">
-                {category.name}
+                {category?.name}
               </div>
             </Link>
           ))
         ) : (
+
+          // write this like this
+          // {[...Array(5)].map((_, index) => <SkeletonCard key={index} />)}
+          // or
+
           <div className="flex justify-center gap-3">
             <SkeletonCard />
             <SkeletonCard />

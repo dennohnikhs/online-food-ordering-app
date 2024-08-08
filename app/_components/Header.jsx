@@ -9,7 +9,7 @@ import Image from "next/image";
 function Header() {
   const { isSignedIn } = useUser();
   return (
-    <div className="flex justify-between items-center p-6 shadow-sm sticky top-0 left-0 z-200 w-full  ">
+    <div className="flex justify-between items-center lg:p-6 p-3 shadow-sm sticky top-0 left-0 z-200 w-full bg-gray-400 z-50 ">
       <Image
         src="/logo.png"
         alt="logo"

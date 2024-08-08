@@ -3,9 +3,11 @@ import Header from "./_components/Header";
 
 function Provider({ children }) {
   return (
-    <div className="px-10 ">
+    <div>
       <Header />
+      <div className="px-10">
       {children}
+      </div>
     </div>
   );
 }

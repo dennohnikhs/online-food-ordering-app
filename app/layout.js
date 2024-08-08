@@ -2,7 +2,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import Provider from "./Provider";
 
-import { Inter as FontSans } from "next/font/google";
 
 export const metadata = {
   title: "qmsi restaurant shop",
@@ -12,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html>
         <head />
         <body>
           <Provider>{children}</Provider>
